@@ -429,7 +429,7 @@ void isr_gpio7() {
         last_clock_time = now;
         return;
     }
-    if (is_grids_mode) grids_step = 15; // Reset seq
+    if (is_grids_mode) advanceGrids(); // Clock
     else trigKick();
 }
 void isr_gpio0() {
@@ -440,7 +440,7 @@ void isr_gpio0() {
 }
 void isr_gpio28() {
     if (current_kit == 14) return; // Ext Audio: ignore all triggers
-    if (is_grids_mode) advanceGrids(); // Clock
+    if (is_grids_mode) grids_step = 15; // Reset seq
     else if (current_kit == 13) return; // VA Bass CV mode
     else trigHihat();
 }
